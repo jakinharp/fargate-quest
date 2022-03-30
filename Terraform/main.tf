@@ -22,6 +22,7 @@ resource "docker_registry_image" "node" {
     dockerfile = "./Dockerfile"
   }
 
+  ### REMOVE LIFECYCLE IF NEED NEW IMAGE ###
   lifecycle {
     ignore_changes = [
       name,
