@@ -8,48 +8,49 @@ variable "region-main" {
   default = "us-east-1"
 }
 
-variable "repository_list" {
+variable "repository-list" {
   description = "List of repository names"
   type        = list(any)
   default     = ["rearc-quest"]
 }
 
-variable "external_ip" {
+variable "external-ip" {
   type    = string
   default = "0.0.0.0/0"
 }
 
-variable "app_port" {
+variable "app-port" {
   default     = "80"
   description = "portexposed on the docker image"
 }
 
-variable "ecs_task_execution_role" {
-  default     = "myECcsTaskExecutionRole"
-  description = "ECS task execution role name"
-}
-
-variable "app_image" {
+variable "app-image" {
   default     = "node:latest"
   description = "docker image to run in this ECS cluster"
 }
 
+#Need at least 2 subnets in 2 AZs for ALB to work properly
+variable "az-count" {
+  default     = "2"
+  description = "number of AZs in active region"
+}
+
 #Need at least as many containers as you have AZs
-variable "app_count" {
+variable "app-count" {
   default     = "2"
   description = "numer of docker containers to run"
 }
 
-variable "health_check_path" {
+variable "health-check-path" {
   default = "/"
 }
 
-variable "fargate_cpu" {
+variable "fargate-cpu" {
   default     = "1024"
   description = "fargate instacne CPU units to provision,my requirent 1 vcpu so gave 1024"
 }
 
-variable "fargate_memory" {
+variable "fargate-memory" {
   default     = "2048"
   description = "Fargate instance memory to provision (in MiB) not MB"
 }

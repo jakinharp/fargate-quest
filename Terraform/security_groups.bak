@@ -1,4 +1,0 @@
-#ALB SG 
-#resource "aws_security_group"
-
-# TODO: add SG for instances

@@ -15,7 +15,7 @@ resource "docker_registry_image" "node" {
   ##   name     = "${aws_ecr_repository.repository[each.key].repository_url}:latest"
 
   #    name = "233580134604.dkr.ecr.us-east-1.amazonaws.com/rearc-quest"
-  name = "$aws_ecr_repository.repository.repository_url}:latest"
+  name = "${aws_ecr_repository.repository.repository_url}:latest"
 
   build {
     context    = "${path.cwd}/rearc-quest/"
