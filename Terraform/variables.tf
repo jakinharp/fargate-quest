@@ -20,7 +20,7 @@ variable "external-ip" {
 }
 
 variable "app-port" {
-  default     = "80"
+  default     = "3000"
   description = "portexposed on the docker image"
 }
 
