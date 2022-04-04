@@ -1,29 +1,26 @@
 [
     {
-      "name": "rearcQuestApp",
-      "image": "${app_image}",
-      "cpu": ${fargate_cpu},
-      "memory": ${fargate_memory},
+      "name": "${var.app-name}",
+      "image": "${var.app-image}",
+      "cpu": "${var.fargate-cpu}",
+      "memory": "${var.fargate-memory}",
       "networkMode": "awsvpc",
       "logConfiguration": {
           "logDriver": "awslogs",
           "options": {
             "awslogs-group": "/ecs/rearcQuestApp",
-            "awslogs-region": "${aws}",
+            "awslogs-region": "${var.region-main}",
             "awslogs-stream-prefix": "ecs"
           }
       },
       "portMappings": [
         {
-          "containerPort": ${app_port},
-          "hostPort": ${app_port}
+          "containerPort": "${var.app-port}",
+          "hostPort": "${var.app-port}"
         }
       ],
       "environment": [
-        {
-          "name": "SECRET_WORD",
-          "value" "TwelveFactor"
-        }
+        {"name": "SECRET_WORD", "value": "TwelveFactor"}
       ]
     }
   ]

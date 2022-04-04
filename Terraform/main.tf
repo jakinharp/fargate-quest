@@ -11,11 +11,8 @@ resource "aws_ecr_repository" "repository" {
 
 ## Build docker image and push to ECR
 resource "docker_registry_image" "node" {
-  ##   for_each = toset(var.repository_list)
-  ##   name     = "${aws_ecr_repository.repository[each.key].repository_url}:latest"
-
-  #    name = "233580134604.dkr.ecr.us-east-1.amazonaws.com/rearc-quest"
-  #    name = "${aws_ecr_repository.repository.repository_url}:latest"
+  #   for_each = toset(var.repository_list)
+  #    name = "${aws_ecr_repository.repository.repository_url}:<imageNameVar>"
   name = "${aws_ecr_repository.repository.repository_url}:node"
 
   build {

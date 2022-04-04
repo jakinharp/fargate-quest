@@ -20,7 +20,8 @@ variable "external-ip" {
 }
 
 variable "app-port" {
-  default     = "3000"
+  type        = number
+  default     = 3000
   description = "port exposed on the docker image"
 }
 
@@ -39,7 +40,7 @@ variable "az-count" {
 #Need at least as many containers as you have AZs
 variable "app-count" {
   default     = "2"
-  description = "numer of docker containers to run"
+  description = "numer of docker apps to run"
 }
 
 variable "health-check-path" {
@@ -47,11 +48,17 @@ variable "health-check-path" {
 }
 
 variable "fargate-cpu" {
-  default     = "1024"
+  type        = number
+  default     = 1024
   description = "fargate instacne CPU units to provision,my requirent 1 vcpu so gave 1024"
 }
 
 variable "fargate-memory" {
-  default     = "2048"
+  type        = number
+  default     = 2048
   description = "Fargate instance memory to provision (in MiB) not MB"
+}
+
+variable "app-name" {
+  default = "rearcQuestApp"
 }

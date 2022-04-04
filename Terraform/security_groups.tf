@@ -5,9 +5,12 @@ resource "aws_security_group" "alb-sg" {
   vpc_id      = aws_vpc.main-vpc.id
 
   ingress {
-    protocol    = "tcp"
-    from_port   = var.app-port
-    to_port     = var.app-port
+    protocol = "tcp"
+    #from_port   = var.app-port
+    #to_port     = var.app-port
+    ##Replaced 2u/2d trying to open 80 and map to 3000
+    from_port   = 80
+    to_port     = 80
     cidr_blocks = ["0.0.0.0/0"]
   }
 
@@ -39,5 +42,3 @@ resource "aws_security_group" "ecs-sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 }
-
-# TODO: add SG for instances
