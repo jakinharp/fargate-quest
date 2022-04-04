@@ -22,14 +22,17 @@ resource "aws_ecs_task_definition" "rearc-quest-ecs-task-def" {
   cpu                      = var.fargate-cpu
   memory                   = var.fargate-memory
   container_definitions    = data.template_file.rearcQuestApp.rendered
+  depends_on               = [aws_iam_role.ecs_task_execution_role]
 }
 
 resource "aws_ecs_service" "rearc-quest-app-service" {
-  name            = "rearc-quest-app-service"
-  cluster         = aws_ecs_cluster.rearc-quest-ecs-cl.id
-  task_definition = aws_ecs_task_definition.rearc-quest-ecs-task-def.arn
-  desired_count   = var.app-count
-  launch_type     = "FARGATE"
+  name                              = "rearc-quest-app-service"
+  cluster                           = aws_ecs_cluster.rearc-quest-ecs-cl.id
+  task_definition                   = aws_ecs_task_definition.rearc-quest-ecs-task-def.arn
+  desired_count                     = var.app-count
+  launch_type                       = "FARGATE"
+  health_check_grace_period_seconds = 200
+  #  iam_role        = aws_iam_role.ecs_task_execution_role.arn
 
   network_configuration {
     security_groups = [aws_security_group.ecs-sg.id]

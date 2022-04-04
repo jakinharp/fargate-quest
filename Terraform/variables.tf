@@ -21,11 +21,12 @@ variable "external-ip" {
 
 variable "app-port" {
   default     = "3000"
-  description = "portexposed on the docker image"
+  description = "port exposed on the docker image"
 }
 
 variable "app-image" {
-  default     = "node:latest"
+  #  default     = "node:latest"
+  default     = "233580134604.dkr.ecr.us-east-1.amazonaws.com/trial-rearc:latest"
   description = "docker image to run in this ECS cluster"
 }
 
