@@ -9,7 +9,7 @@
           "logDriver": "awslogs",
           "options": {
             "awslogs-group": "/ecs/rearcQuestApp",
-            "awslogs-region": "${aws_region}",
+            "awslogs-region": "${aws}",
             "awslogs-stream-prefix": "ecs"
           }
       },
@@ -17,6 +17,12 @@
         {
           "containerPort": ${app_port},
           "hostPort": ${app_port}
+        }
+      ],
+      "environment": [
+        {
+          "name": "SECRET_WORD",
+          "value" "TwelveFactor"
         }
       ]
     }
