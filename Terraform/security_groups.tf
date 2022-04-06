@@ -14,12 +14,16 @@ resource "aws_security_group" "alb-sg" {
 
 #For HTTPS redirect
 resource "aws_security_group_rule" "public-in-https" {
+  description = "public-in-https"
   type              = "ingress"
   from_port         = 443
   to_port           = 443
   protocol          = "tcp"
   cidr_blocks       = ["0.0.0.0/0"]
   security_group_id = aws_security_group.alb-sg.id
+  lifecycle {
+    create_before_destroy = true
+  }
 }
 
 # this security group for ecs - Traffic to the ECS cluster should only come from the ALB
