@@ -6,10 +6,9 @@ resource "aws_alb" "alb" {
 }
 
 resource "aws_alb_target_group" "rearcQuestApp-tg" {
-  #  name= "rearcQuestApp-tg"
+  # name= "rearcQuestApp-tg"
   name_prefix = "RQA-TG"
-  #port = Port on which targets receive traffic, unless overridden when registering a specific target. 
-  #port        = var.app-port
+  #port = Port on which instances receive traffic
   port        = 80
   protocol    = "HTTP"
   target_type = "ip"
@@ -32,23 +31,5 @@ resource "aws_alb_target_group" "rearcQuestApp-tg" {
     ignore_changes = [
       name,
     ]
-  }
-}
-
-#redirecting all incomming traffic from ALB to the target group
-resource "aws_alb_listener" "rearcQuestApp" {
-  load_balancer_arn = aws_alb.alb.id
-  #port =  Port on which the load balancer is listening. Not valid for Gateway Load Balancers.
-  #  port              = var.app-port
-  #Testing lb port on 3000 instead of 80
-  #port     = var.app-port
-  port     = 80
-  protocol = "HTTP"
-  #ssl_policy        = "ELBSecurityPolicy-2016-08"
-  #certificate_arn   = "arn:aws:iam::187416307283:server-certificate/test_cert_rab3wuqwgja25ct3n4jdj2tzu4"
-  #enable above 2 if you are using HTTPS listner and change protocal from HTTPS to HTTPS
-  default_action {
-    type             = "forward"
-    target_group_arn = aws_alb_target_group.rearcQuestApp-tg.arn
   }
 }
