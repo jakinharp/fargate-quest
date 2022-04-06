@@ -6,7 +6,7 @@ This A-quest-in-the-clouds challenge was a blast! Here are is my submission.
 1. Work assets: link to a hosted [git repository](https://github.com/jakinharp/fargate-quest).
 2. Proof of completion, as one or both of the following:
 <br>
- > a. A screenshot: A friendly Yoda appears! ![screenshot](https://github.com/jakinharp/fargate-quest/blob/main/yoda.PNG?raw=true)
+ > a. A screenshot: A friendly Yoda appears! ![screenshot](yoda.PNG)
 <br>
 > b. A link to the hosted public cloud deployment: http://jakin.click (redirects to HTTPS)
 3. An answer to the prompt: "Given more time, I would improve..."
