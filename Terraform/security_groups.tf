@@ -5,15 +5,23 @@ resource "aws_security_group" "alb-sg" {
   vpc_id      = aws_vpc.main-vpc.id
 
   ingress {
-    protocol = "tcp"
-    #port on which traffic will be received from user
-    #must match aws_alb_listener.rearcQuestApp.port
+    protocol    = "tcp"
     from_port   = 80
     to_port     = 80
-    #from_port   = var.app-port
-    #to_port     = var.app-port
     cidr_blocks = ["0.0.0.0/0"]
   }
+
+  ingress {
+    protocol = "tcp"
+    #port on which traffic will be received from user
+    #must match aws_alb_listener.<last-listener-before-ALB>.port
+    #from_port   = 80
+    #to_port     = 80
+    from_port   = 443
+    to_port     = 443
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
   egress {
     protocol    = "-1"
     from_port   = 0

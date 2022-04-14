@@ -1,47 +1,47 @@
 #redirecting all incomming traffic from ALB to the target group
-#resource "aws_alb_listener" "rearcQuestApp" {
-#  load_balancer_arn = aws_alb.alb.id
-#  port              = 80
-#  protocol          = "HTTP"
-#  default_action {
-#    type = "redirect"
-#    redirect {
-#      port        = 443
-#      protocol    = "HTTPS"
-#      status_code = "HTTP_301"
-#    }
-#  }
-#}
-
-#resource "aws_alb_listener" "alb-https" {
-#  load_balancer_arn = aws_alb.alb.id
-#  #port- port on which alb is listening
-#  port            = "443"
-#  protocol        = "HTTPS"
-#  ssl_policy      = "ELBSecurityPolicy-2016-08"
-#  certificate_arn = aws_acm_certificate_validation.cert.certificate_arn
-#
-#  default_action {
-#    type             = "forward"
-#    target_group_arn = aws_alb_target_group.rearcQuestApp-tg.arn
-#  }
-#}
-
 resource "aws_alb_listener" "rearcQuestApp" {
   load_balancer_arn = aws_alb.alb.id
+  port              = 80
+  protocol          = "HTTP"
+  default_action {
+    type = "redirect"
+    redirect {
+      port        = 443
+      protocol    = "HTTPS"
+      status_code = "HTTP_301"
+    }
+  }
+}
+
+resource "aws_alb_listener" "alb-https" {
+  load_balancer_arn = aws_alb.alb.id
   #port- port on which alb is listening
-  #at least one listener port must match aws_security_group.alb-sg
-  #port     = var.app-port
-  port     = 80
-  protocol = "HTTP"
-  #ssl_policy      = "ELBSecurityPolicy-2016-08"
-  #certificate_arn = aws_acm_certificate_validation.cert.certificate_arn
+  port            = "443"
+  protocol        = "HTTPS"
+  ssl_policy      = "ELBSecurityPolicy-2016-08"
+  certificate_arn = aws_acm_certificate_validation.cert.certificate_arn
 
   default_action {
     type             = "forward"
     target_group_arn = aws_alb_target_group.rearcQuestApp-tg.arn
   }
 }
+
+#resource "aws_alb_listener" "rearcQuestApp" {
+#  load_balancer_arn = aws_alb.alb.id
+#  #port- port on which alb is listening
+#  #at least one listener port must match aws_security_group.alb-sg
+#  #port     = var.app-port
+#  port     = 80
+#  protocol = "HTTP"
+#  #ssl_policy      = "ELBSecurityPolicy-2016-08"
+#  #certificate_arn = aws_acm_certificate_validation.cert.certificate_arn
+#
+#  default_action {
+#    type             = "forward"
+#    target_group_arn = aws_alb_target_group.rearcQuestApp-tg.arn
+#  }
+#}
 
 data "aws_route53_zone" "zone" {
   #name = "jakin.click."
