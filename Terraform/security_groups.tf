@@ -5,26 +5,34 @@ resource "aws_security_group" "alb-sg" {
   vpc_id      = aws_vpc.main-vpc.id
 
   ingress {
-    protocol    = "tcp"
-    from_port   = 80
-    to_port     = 80
+    protocol = "tcp"
+    #from_port   = 80
+    #to_port     = 80
+    from_port   = var.app-port
+    to_port     = var.app-port
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  egress {
+    protocol    = "-1"
+    from_port   = 0
+    to_port     = 0
     cidr_blocks = ["0.0.0.0/0"]
   }
 }
 
 #For HTTPS redirect
-resource "aws_security_group_rule" "public-in-https" {
-  description = "public-in-https"
-  type              = "ingress"
-  from_port         = 443
-  to_port           = 443
-  protocol          = "tcp"
-  cidr_blocks       = ["0.0.0.0/0"]
-  security_group_id = aws_security_group.alb-sg.id
-  lifecycle {
-    create_before_destroy = true
-  }
-}
+#resource "aws_security_group_rule" "public-in-https" {
+#  description       = "public-in-https"
+#  type              = "ingress"
+#  from_port         = 443
+#  to_port           = 443
+#  protocol          = "tcp"
+#  cidr_blocks       = ["0.0.0.0/0"]
+#  security_group_id = aws_security_group.alb-sg.id
+#  lifecycle {
+#    create_before_destroy = true
+#  }
+#}
 
 # this security group for ecs - Traffic to the ECS cluster should only come from the ALB
 resource "aws_security_group" "ecs-sg" {

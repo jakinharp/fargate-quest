@@ -6,10 +6,11 @@ resource "aws_alb" "alb" {
 }
 
 resource "aws_alb_target_group" "rearcQuestApp-tg" {
-  # name= "rearcQuestApp-tg"
-  name_prefix = "RQA-TG"
+  name= "rearcQuestApp-tg"
+  # name_prefix = "RQA-TG"
   #port = Port on which instances receive traffic
-  port        = 80
+  #port        = 80
+  port        = 3000
   protocol    = "HTTP"
   target_type = "ip"
   vpc_id      = aws_vpc.main-vpc.id

@@ -1,6 +1,6 @@
 resource "aws_appautoscaling_target" "rearcQuest-ecs-target" {
   max_capacity       = 4
-  min_capacity       = 1
+  min_capacity       = 2
   resource_id        = "service/${aws_ecs_cluster.rearc-quest-ecs-cl.name}/${aws_ecs_service.rearc-quest-app-service.name}"
   scalable_dimension = "ecs:service:DesiredCount"
   service_namespace  = "ecs"

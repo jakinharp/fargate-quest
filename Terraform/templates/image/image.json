@@ -1,26 +1,26 @@
 [
-    {
-      "name": "${var.app-name}",
-      "image": "${var.app-image}",
-      "cpu": "${var.fargate-cpu}",
-      "memory": "${var.fargate-memory}",
-      "networkMode": "awsvpc",
-      "logConfiguration": {
-          "logDriver": "awslogs",
-          "options": {
-            "awslogs-group": "/ecs/rearcQuestApp",
-            "awslogs-region": "${var.region-main}",
-            "awslogs-stream-prefix": "ecs"
-          }
-      },
-      "portMappings": [
-        {
-          "containerPort": "${var.app-port}",
-          "hostPort": "${var.app-port}"
-        }
-      ],
-      "environment": [
-        {"name": "SECRET_WORD", "value": "TwelveFactor"}
-      ]
-    }
-  ]
+  {
+    "name" : "${app-name}",
+   "image" : "${app-image}",
+    "cpu" : ${fargate-cpu},
+    "memory" : ${fargate-memory},
+    "networkMode" : "awsvpc",
+    "logConfiguration" : {
+      "logDriver" : "awslogs",
+      "options" : {
+        "awslogs-group" : "/ecs/rearcQuestApp",
+        "awslogs-region" : "${aws-region}",
+        "awslogs-stream-prefix" : "ecs"
+      }
+    },
+    "portMappings" : [
+      {
+        "containerPort" : ${app-port},
+        "hostPort" : ${app-port}
+      }
+    ],
+    "environment" : [
+      { "name" : "SECRET_WORD", "value" : "TwelveFactor" }
+    ]
+  }
+]
