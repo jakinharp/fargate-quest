@@ -6,11 +6,11 @@ resource "aws_alb" "alb" {
 }
 
 resource "aws_alb_target_group" "rearcQuestApp-tg" {
-  name= "rearcQuestApp-tg"
+  name = "rearcQuestApp-tg"
   # name_prefix = "RQA-TG"
   #port = Port on which instances receive traffic
   #port        = 80
-  port        = 3000
+  port        = var.app-port
   protocol    = "HTTP"
   target_type = "ip"
   vpc_id      = aws_vpc.main-vpc.id
@@ -28,7 +28,7 @@ resource "aws_alb_target_group" "rearcQuestApp-tg" {
   }
 
   lifecycle {
-    create_before_destroy = true
+    #  create_before_destroy = true
     ignore_changes = [
       name,
     ]

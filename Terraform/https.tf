@@ -30,7 +30,9 @@
 resource "aws_alb_listener" "rearcQuestApp" {
   load_balancer_arn = aws_alb.alb.id
   #port- port on which alb is listening
-  port     = 3000
+  #at least one listener port must match aws_security_group.alb-sg
+  #port     = var.app-port
+  port     = 80
   protocol = "HTTP"
   #ssl_policy      = "ELBSecurityPolicy-2016-08"
   #certificate_arn = aws_acm_certificate_validation.cert.certificate_arn

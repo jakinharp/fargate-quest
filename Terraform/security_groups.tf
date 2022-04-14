@@ -6,10 +6,12 @@ resource "aws_security_group" "alb-sg" {
 
   ingress {
     protocol = "tcp"
-    #from_port   = 80
-    #to_port     = 80
-    from_port   = var.app-port
-    to_port     = var.app-port
+    #port on which traffic will be received from user
+    #must match aws_alb_listener.rearcQuestApp.port
+    from_port   = 80
+    to_port     = 80
+    #from_port   = var.app-port
+    #to_port     = var.app-port
     cidr_blocks = ["0.0.0.0/0"]
   }
   egress {
